@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSIDE MY MIND</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+/* PORTADA */
+
+#landing{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:radial-gradient(circle,#1e3a8a,#020617);
+}
+
+.core{
+width:180px;
+height:180px;
+border-radius:50%;
+background:#8b5cf6;
+box-shadow:0 0 30px #8b5cf6,0 0 80px #8b5cf6;
+margin-bottom:30px;
+animation:flotar 3s infinite;
+}
+
+@keyframes flotar{
+50%{
+transform:translateY(-15px);
+}
+}
+
+button{
+padding:15px 25px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-size:18px;
+margin:5px;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* JUEGO */
+
+#juego{
+display:none;
+padding:30px;
+min-height:100vh;
+}
+
+#mainCore{
+
+
+
+
+
+
+
+animation:pulsar 2s infinite;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+width:170px;
+height:170px;
+border-radius:50%;
+background:#FFD700;
+margin:20px auto;
+box-shadow:0 0 30px #FFD700;
+transition:1s;
+}
+
+#imagenMision{
+width:400px;
+max-width:90%;
+border-radius:20px;
+margin:20px 0;
+box-shadow:0 0 20px rgba(255,255,255,.2);
+}
+
+.mision{
+background:rgba(255,255,255,.08);
+padding:20px;
+border-radius:15px;
+max-width:800px;
+margin:auto;
+}
+
+.emociones{
+margin-top:20px;
+}
+
+.alegria{background:#FFD700;color:black;}
+.tristeza{background:#3b82f6;}
+.enojo{background:#ef4444;}
+.miedo{background:#8b5cf6;}
+.ansiedad{background:#f97316;}
+
+/* TERMOMETRO */
+
+.termometro{
+max-width:700px;
+margin:30px auto;
+text-align:left;
+}
+
+.barra{
+height:25px;
+background:#1e293b;
+border-radius:20px;
+overflow:hidden;
+margin-bottom:10px;
+}
+
+
+
+.relleno{
+height:100%;
+width:0%;
+transition:1s;
+box-shadow:
+0 0 15px currentColor,
+0 0 30px currentColor,
+0 0 50px currentColor;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#barAlegria{background:#FFD700;}
+#barTristeza{background:#3b82f6;}
+#barEnojo{background:#ef4444;}
+#barMiedo{background:#8b5cf6;}
+#barAnsiedad{background:#f97316;}
+
+/* RESULTADO */
+
+#resultado{
+display:none;
+height:100vh;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+position:relative;
+overflow:hidden;
+background:
+radial-gradient(circle at center,
+rgba(255,255,255,.1),
+transparent 70%),
+#020617;
+}
+
+#emoji{
+font-size:180px;
+margin:20px;
+animation:
+flotarEmoji 2s infinite ease-in-out,
+brilloEmoji 2s infinite alternate;
+}
+
+#ganador{
+font-size:3rem;
+margin:15px;
+text-shadow:
+0 0 15px white,
+0 0 35px white,
+0 0 70px white;
+}
+
+#mensaje{
+font-size:22px;
+max-width:700px;
+padding:20px;
+}
+
+@keyframes flotarEmoji{
+50%{
+transform:translateY(-20px);
+}
+}
+
+@keyframes brilloEmoji{
+from{
+filter:
+drop-shadow(0 0 15px white);
+}
+to{
+filter:
+drop-shadow(0 0 60px white);
+}
+}
+
+/* PARTÍCULAS */
+
+.particulas{
+position:absolute;
+width:100%;
+height:100%;
+top:0;
+left:0;
+pointer-events:none;
+overflow:hidden;
+}
+
+.spark{
+position:absolute;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+animation:spark 5s linear infinite;
+}
+
+@keyframes spark{
+
+from{
+transform:
+translateY(100vh)
+scale(.5);
+opacity:1;
+}
+
+to{
+transform:
+translateY(-100px)
+scale(2);
+opacity:0;
+}
+
+}
+
+
+@keyframes pulsar{
+
+50%{
+transform:scale(1.08);
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+
+<div id="landing">
+
+<div class="core"></div>
+
+<h1>Entre emociones y decisiones</h1>
+
+
+<button onclick="entrar()">
+Entrar al Centro de Control
+</button>
+
+
+</div>
+
+<!-- JUEGO -->
+
+<div id="juego">
+
+<h1>Centro de Control Emocional</h1>
+
+<div id="mainCore"></div>
+
+<div class="mision">
+
+<h2 id="tituloMision"></h2>
+
+<img id="imagenMision" src="">
+
+<p>Elegí la emoción que tomaría el control.</p>
+
+</div>
+
+<div class="emociones">
+
+<button class="alegria"
+onclick="elegir('Alegría','#FFD700')">
+🟡 Alegría
+</button>
+
+<button class="tristeza"
+onclick="elegir('Tristeza','#3b82f6')">
+🔵 Tristeza
+</button>
+
+<button class="enojo"
+onclick="elegir('Enojo','#ef4444')">
+🔴 Enojo
+</button>
+
+<button class="miedo"
+onclick="elegir('Miedo','#8b5cf6')">
+🟣 Miedo
+</button>
+
+<button class="ansiedad"
+onclick="elegir('Ansiedad','#f97316')">
+🟠 Ansiedad
+</button>
+
+</div>
+
+<div class="termometro">
+
+Alegría
+<div class="barra">
+<div id="barAlegria" class="relleno"></div>
+</div>
+
+Tristeza
+<div class="barra">
+<div id="barTristeza" class="relleno"></div>
+</div>
+
+Enojo
+<div class="barra">
+<div id="barEnojo" class="relleno"></div>
+</div>
+
+Miedo
+<div class="barra">
+<div id="barMiedo" class="relleno"></div>
+</div>
+
+Ansiedad
+<div class="barra">
+<div id="barAnsiedad" class="relleno"></div>
+</div>
+
+</div>
+
+</div>
+
+<!-- RESULTADO -->
+
+<div id="resultado">
+
+<div class="particulas" id="particulas"></div>
+
+
+
+
+
+
+
+
+
+<h1>🏆 ¿QUIÉN CONTROLÓ TU MENTE?</h1>
+
+<div id="emoji"></div>
+
+<h2 id="ganador"></h2>
+
+<p id="mensaje"></p>
+
+<button onclick="location.reload()">
+ Jugar otra vez
+</button>
+
+</div>
+
+<script>
+
+const misiones=[
+
+{
+titulo:"Examen sorpresa",
+imagen:"https://i.pinimg.com/736x/83/4d/68/834d68109e120a501aac9a08a9376763.jpg"
+},
+
+{
+titulo:"Trabajo grupal",
+imagen:"https://i.pinimg.com/736x/7a/cb/96/7acb961dacc6324b7ca4f52d1f41e36d.jpg"
+},
+
+{
+titulo:" Te dejan en visto",
+imagen:"https://i.pinimg.com/736x/74/8c/bd/748cbdfe2419610bd84c2681f2df24c3.jpg"
+},
+
+{
+titulo:"Tenemos una sorpresa para vos",
+imagen:"https://i.pinimg.com/736x/2c/b2/f9/2cb2f91e1d70d76c44fe76c90903c3d4.jpg"
+},
+
+{
+titulo:"Pedís comida y tarda más de una hora",
+imagen:"https://i.pinimg.com/736x/44/85/a3/4485a314e52d276b5261a1994ed6e2fe.jpg"
+},
+
+{
+titulo:"Entregás el parcial y recién ahí recordás la respuesta",
+imagen:"https://i.pinimg.com/736x/e9/db/e6/e9dbe66550f097c4796759135d467c09.jpg"
+},
+
+
+{
+titulo:"Te equivocás en una cuenta y te arruina todo el ejercicio",
+imagen:"https://i.pinimg.com/736x/d3/9a/55/d39a55f3c04d6f053c5e6cd30b154d8c.jpg"
+},
+
+
+{
+titulo:"Comparás respuestas con un compañero y coinciden",
+imagen:"https://i.pinimg.com/originals/dd/41/78/dd4178a45e6e3210c9d57e8cb1ab4ca3.gif"
+},
+
+{
+titulo:"llegas tarde a un parcial",
+imagen:"https://i.pinimg.com/originals/8a/6d/3d/8a6d3d749c0f380665264a4a04f3d29c.gif"
+},
+
+{
+titulo:"El profe dice “pueden usar la hoja como ayuda”",
+imagen:"https://i.pinimg.com/1200x/f8/c3/8b/f8c38bf438f3d190098111db5908e40d.jpg"
+},
+
+{
+titulo:"El profe devuelve las notas y aprobaste",
+imagen:"https://i.pinimg.com/736x/c5/d9/cc/c5d9cc58c8eaa239dc45f6dd2be5c882.jpg"
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+];
+
+let actual=0;
+
+const puntos={
+"Alegría":0,
+"Tristeza":0,
+"Enojo":0,
+"Miedo":0,
+"Ansiedad":0
+};
+
+function entrar(){
+
+document.getElementById("landing").style.display="none";
+document.getElementById("juego").style.display="block";
+
+cargarMision();
+
+}
+
+function cargarMision(){
+
+document.getElementById("tituloMision").innerHTML=
+misiones[actual].titulo;
+
+document.getElementById("imagenMision").src=
+misiones[actual].imagen;
+
+}
+
+function elegir(emocion,color){
+
+puntos[emocion]++;
+
+actualizarTermometro();
+
+document.getElementById("mainCore").style.background=
+color;
+
+actual++;
+
+if(actual < misiones.length){
+
+cargarMision();
+
+}else{
+
+finalizar();
+
+}
+
+}
+
+function actualizarTermometro(){
+
+let total=0;
+
+for(let e in puntos){
+total+=puntos[e];
+}
+
+if(total===0)return;
+
+document.getElementById("barAlegria").style.width=
+(puntos["Alegría"]/total*100)+"%";
+
+document.getElementById("barTristeza").style.width=
+(puntos["Tristeza"]/total*100)+"%";
+
+document.getElementById("barEnojo").style.width=
+(puntos["Enojo"]/total*100)+"%";
+
+document.getElementById("barMiedo").style.width=
+(puntos["Miedo"]/total*100)+"%";
+
+document.getElementById("barAnsiedad").style.width=
+(puntos["Ansiedad"]/total*100)+"%";
+
+}
+
+
+
+
+function finalizar(){
+
+document.getElementById("juego").style.display="none";
+document.getElementById("resultado").style.display="flex";
+
+let ganador="Alegría";
+
+for(let e in puntos){
+
+if(puntos[e] > puntos[ganador]){
+ganador=e;
+}
+
+}
+
+const emojis={
+"Alegría":"😄",
+"Tristeza":"😢",
+"Enojo":"😡",
+"Miedo":"😨",
+"Ansiedad":"😰"
+};
+
+const mensajes={
+
+"Alegría":
+"La alegría tomó el control. Actuaste con optimismo y confianza.",
+
+"Tristeza":
+"La tristeza dominó tus decisiones y te llevó a reflexionar.",
+
+"Enojo":
+"El enojo tomó el mando y te impulsó a reaccionar rápidamente.",
+
+"Miedo":
+"El miedo te hizo actuar con cautela y protección.",
+
+"Ansiedad":
+"La ansiedad tomó el control manteniéndote alerta."
+
+};
+
+document.getElementById("emoji").innerHTML=
+emojis[ganador];
+
+document.getElementById("ganador").innerHTML=
+"🏆 " + ganador + " DOMINÓ TU MENTE";
+
+document.getElementById("mensaje").innerHTML=
+mensajes[ganador];
+
+/* partículas */
+
+for(let i=0;i<70;i++){
+
+let spark=document.createElement("div");
+
+spark.classList.add("spark");
+
+spark.style.left=Math.random()*100+"%";
+
+spark.style.animationDelay=
+Math.random()*5+"s";
+
+spark.style.animationDuration=
+(3+Math.random()*4)+"s";
+
+document.getElementById("particulas")
+.appendChild(spark);
+
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
