@@ -1,0 +1,71 @@
+INKY — Asistente virtual de INK HOUSE TATTOO
+=============================================
+
+CONTENIDO DEL ZIP
+------------------
+- index.html   → El chatbot completo (HTML + CSS + JS en un solo archivo).
+- LEEME.txt    → Este instructivo.
+
+CÓMO PROBARLO
+--------------
+1. Descomprimí el zip.
+2. Abrí "index.html" con doble clic en cualquier navegador (Chrome, Edge, Safari, etc.).
+3. INKY va a saludar automáticamente y mostrar el menú de opciones rápidas.
+
+CÓMO CONFIGURARLO CON LOS DATOS REALES DEL ESTUDIO
+----------------------------------------------------
+INKY nunca inventa precios, horarios, disponibilidad ni medios de pago:
+si un dato no está cargado, se lo avisa al cliente y deriva la consulta
+al tatuador. Para que responda con la información real del estudio,
+abrí "index.html" con un editor de texto (Bloc de notas, VS Code, etc.)
+y buscá este bloque cerca del principio del <script>:
+
+    const CONFIG = {
+      direccion: "",
+      horarios: "",
+      mediosDePago: "",
+      telefonoWhatsapp: "",
+      instagram: "",
+    };
+
+Completá cada campo entre comillas, por ejemplo:
+
+    const CONFIG = {
+      direccion: "Av. Siempre Viva 1234, Bragado, Buenos Aires",
+      horarios: "Martes a sábado, de 11 a 19 hs",
+      mediosDePago: "Efectivo, transferencia y tarjetas de débito/crédito",
+      telefonoWhatsapp: "5492352123456",   // código de país + número, sin +, espacios ni guiones
+      instagram: "@inkhousetattoo",
+    };
+
+Guardá el archivo y volvé a abrirlo en el navegador para ver los cambios.
+
+QUÉ HACE EL CHATBOT
+---------------------
+- Responde consultas frecuentes: precios, diseños personalizados, tamaños,
+  zonas del cuerpo, duración, cuidados, formas de pago, retoques,
+  ubicación y horarios.
+- Detecta el tema también cuando el cliente escribe libremente
+  (por palabras clave), no solo con los botones rápidos.
+- Guía paso a paso la solicitud de turno, pidiendo: nombre, contacto,
+  tatuaje deseado, tamaño, zona del cuerpo, fecha preferida y un
+  detalle adicional.
+- Al terminar la solicitud de turno, arma un botón de WhatsApp que
+  envía todo el resumen al número configurado (si está cargado),
+  para que el estudio confirme la disponibilidad real.
+- Si no tiene un dato cargado (ej. horarios o medios de pago),
+  lo avisa y ofrece derivar la consulta al tatuador, en vez de inventar
+  información.
+
+CÓMO PUBLICARLO EN LA WEB DEL ESTUDIO
+----------------------------------------
+Al ser un único archivo HTML autocontenido, se puede:
+- Subir tal cual a cualquier hosting y linkearlo desde el sitio
+  (ej. un botón "Hablar con INKY" que abra index.html en una pestaña
+  nueva o en un iframe).
+- Insertarlo como iframe dentro de una página existente de
+  CGY Pixel Studio para el sitio de Ink House Tattoo.
+
+Si más adelante quieren que el turno se guarde automáticamente en una
+base de datos o calendario (en lugar de enviarse por WhatsApp), se
+necesitaría sumar un backend — avisame y lo armamos.
